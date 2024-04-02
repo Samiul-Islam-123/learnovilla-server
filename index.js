@@ -6,6 +6,8 @@ const dotenv = require('dotenv');
 const ConnectToDatabase = require('./Database/Connection');
 
 const SignupRoute = require('./Routes/AuthRoutes/Signup')
+const Login = require('./Routes/AuthRoutes/login')
+
 // Create Express app
 const app = express();
 
@@ -32,26 +34,28 @@ app.get('/',(req,res)=>{
 
 //custom routes
 app.use('/auth', SignupRoute);
+app.use('/auth', Login)
 
-// Start the server and listen on the defined port
-	server.listen(PORT, async() => {
-    await ConnectToDatabase(process.env.DB_URL)
-    console.log(`Server is running at ${PORT}`);
-});
 
 // Socket.IO event handlers
 io.on('connection', (socket) => {
-    // Event handler when a user connects
-    console.log('A user connected');
+  // Event handler when a user connects
+  console.log('A user connected');
+  
+  // Event handler when a user disconnects
+  socket.on('disconnect', () => {
+    console.log('User disconnected');
+  });
+  
+  // Example event handler for receiving and broadcasting chat messages
+  socket.on('chat message', (msg) => {
+    console.log('message: ' + msg);
+    io.emit('chat message', msg); // Broadcast the received message to all connected clients
+  });
+});
 
-    // Event handler when a user disconnects
-    socket.on('disconnect', () => {
-        console.log('User disconnected');
-    });
-
-    // Example event handler for receiving and broadcasting chat messages
-    socket.on('chat message', (msg) => {
-        console.log('message: ' + msg);
-        io.emit('chat message', msg); // Broadcast the received message to all connected clients
-    });
+// Start the server and listen on the defined port
+  server.listen(PORT, async() => {
+    await ConnectToDatabase(process.env.DB_URL)
+    console.log(`Server is running at ${PORT}`);
 });
