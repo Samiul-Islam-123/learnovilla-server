@@ -4,16 +4,18 @@ const http = require('http');
 const socketio = require('socket.io');
 const dotenv = require('dotenv');
 const ConnectToDatabase = require('./Database/Connection');
+const cors = require('cors');
 
 const SignupRoute = require('./Routes/AuthRoutes/Signup')
-const Login = require('./Routes/AuthRoutes/login')
-
+const Login = require('./Routes/AuthRoutes/login');
+const Verify = require('./Routes/AuthRoutes/Verification')
 // Create Express app
 const app = express();
 
 //configuring dotenv
 dotenv.config();
 app.use(express.json())
+app.use(cors());
 
 // Create HTTP server using Express app
 const server = http.createServer(app);
@@ -35,6 +37,8 @@ app.get('/',(req,res)=>{
 //custom routes
 app.use('/auth', SignupRoute);
 app.use('/auth', Login)
+app.use('/auth', Verify)
+
 
 
 // Socket.IO event handlers
@@ -56,6 +60,7 @@ io.on('connection', (socket) => {
 
 // Start the server and listen on the defined port
   server.listen(PORT, async() => {
-    await ConnectToDatabase(process.env.DB_URL)
-    console.log(`Server is running at ${PORT}`);
+    console.log(`Initiating Server...`);
+    await ConnectToDatabase(process.env.SAMIUL_DB_URL)
+    console.log(`Server is up running at ${PORT}`);
 });

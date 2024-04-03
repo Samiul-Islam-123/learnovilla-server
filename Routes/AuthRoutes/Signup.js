@@ -1,4 +1,4 @@
-const EncodePassword = require('../../Utils/PasswordEncoding');
+const {EncodePassword} = require('../../Utils/PasswordEncoding');
 const UserModel = require('../../Database/Models/UserModel')
 
 const Router = require('express').Router();

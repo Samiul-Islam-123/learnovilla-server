@@ -8,6 +8,8 @@ const EncodePassword = async(originalPassword) => {
 
 const verifyPassword = async(originalPassword, hashedPassword) => {
     //verifying the password
+    const verification = await bcrypt.compare(originalPassword, hashedPassword);
+    return verification;
 }
 
-module.exports = EncodePassword;
+module.exports = {EncodePassword, verifyPassword};
