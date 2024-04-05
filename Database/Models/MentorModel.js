@@ -11,17 +11,15 @@ const Schema = new mongoose.Schema({
     },
     profilePictureURL : String,
     gender : String,
-    contactNumber : String,
-    address : String,
-    institutionName : String,
-    academicYear : String,
+    contactNumber : Number,
+    description : String,
+    degree : String,
     certificates : [
         {
             fileURL : String,
             label : String
         }
     ],
-    description : String,
     socialLinks : [
         {
             link : String,
@@ -29,14 +27,16 @@ const Schema = new mongoose.Schema({
         }
     ],
 
-    hoobies : [{
-        hobbie : String
+    skills : [{
+        skill : String
     }],
 
-    languages : String,
+    experience : Number,
+
+    language : String,
     
     timeStamp : Date,
 })
 
-const Model = new mongoose.model('students', Schema);
+const Model = new mongoose.model('mentors', Schema);
 module.exports = Model;

@@ -9,6 +9,9 @@ const cors = require('cors');
 const SignupRoute = require('./Routes/AuthRoutes/Signup')
 const Login = require('./Routes/AuthRoutes/login');
 const Verify = require('./Routes/AuthRoutes/Verification')
+
+const PostRouter = require('./Routes/AppRoutes/PostRoutes')
+
 // Create Express app
 const app = express();
 
@@ -39,6 +42,7 @@ app.use('/auth', SignupRoute);
 app.use('/auth', Login)
 app.use('/auth', Verify)
 
+app.use('/app', PostRouter);
 
 
 // Socket.IO event handlers
