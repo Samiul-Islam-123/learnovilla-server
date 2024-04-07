@@ -31,7 +31,8 @@ Router.post('/signup', async(req,res)=>{
             //sending response to user
             res.json({
                 success : true,
-                message : "User Signed Up successfully"
+                message : "User Signed Up successfully",
+                user_id : CurrentUser._id
             })
         }
         catch(error){

@@ -10,7 +10,8 @@ const SignupRoute = require('./Routes/AuthRoutes/Signup')
 const Login = require('./Routes/AuthRoutes/login');
 const Verify = require('./Routes/AuthRoutes/Verification')
 
-const PostRouter = require('./Routes/AppRoutes/PostRoutes')
+const PostRouter = require('./Routes/AppRoutes/PostRoutes');
+const GetRoutes = require('./Routes/AppRoutes/GetRoutes');
 
 // Create Express app
 const app = express();
@@ -43,6 +44,8 @@ app.use('/auth', Login)
 app.use('/auth', Verify)
 
 app.use('/app', PostRouter);
+app.use('/app', GetRoutes);
+
 
 
 // Socket.IO event handlers

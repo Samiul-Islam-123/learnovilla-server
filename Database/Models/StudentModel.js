@@ -23,14 +23,11 @@ const Schema = new mongoose.Schema({
     ],
     description : String,
     socialLinks : [
-        {
-            link : String,
-            label : String
-        }
+       String
     ],
 
     hoobies : [{
-        hobbie : String
+        String
     }],
 
     languages : String,
